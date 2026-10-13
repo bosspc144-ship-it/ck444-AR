@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CK444.AR - Gaming</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101323;
+      color: white;
+    }
+    header {
+      background: #191e35;
+      padding: 20px 14px;
+      text-align: center;
+      border-bottom: 2px solid #7058ff;
+    }
+    header h1 { margin: 0; color: #a99aff; }
+    header p { color: #c5c8dc; }
+    main { padding: 18px; max-width: 900px; margin: auto; }
+    .welcome, .game {
+      background: #1b2038;
+      border: 1px solid #343b60;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .emoji { font-size: 42px; }
+    button {
+      background: #7058ff;
+      color: white;
+      border: 0;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+    }
+    button:active { opacity: .8; }
+    #result { color: #b7ffa9; font-weight: bold; }
+    footer {
+      text-align: center;
+      padding: 22px;
+      color: #aeb3ca;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CK444.AR</h1>
+    <p>Your Gaming World</p>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2>Welcome to CK444.AR!</h2>
+      <p>Discover games, play for free, and enjoy the fun.</p>
+      <p>Demo points: <strong id="points">0</strong></p>
+      <p id="result">Choose a game to begin.</p>
+    </section>
+
+    <h2>🎮 Free Games</h2>
+    <div class="games">
+      <section class="game">
+        <div class="emoji">🔢</div>
+        <h3>Number Guess</h3>
+        <p>Guess a number from 1 to 5.</p>
+        <button onclick="guess()">Play Now</button>
+      </section>
+
+      <section class="game">
+        <div class="emoji">⚡</div>
+        <h3>Quick Tap</h3>
+        <p>Tap the button and earn demo points.</p>
+        <button onclick="tapGame()">Tap to Play</button>
+      </section>
+
+      <section class="game">
+        <div class="emoji">🧠</div>
+        <h3>Brain Challenge</h3>
+        <p>Try a quick maths question.</p>
+        <button onclick="mathGame()">Play Now</button>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    CK444.AR © 2026 · Free-to-play demo
+  </footer>
+
+  <script>
+    let points = 0;
+
+    function addPoints(amount, message) {
+      points += amount;
+      document.getElementById("points").textContent = points;
+      document.getElementById("result").textContent = message;
+    }
+
+    function guess() {
+      const answer = Math.floor(Math.random() * 5) + 1;
+      const choice = prompt("Guess a number from 1 to 5:");
+      if (choice === null || choice.trim() === "") return;
+
+      if (Number(choice) === answer) {
+        addPoints(10, "Correct! You earned 10 demo points.");
+      } else {
+        document.getElementById("result").textContent =
+          "The number was " + answer + ". Try again!";
+      }
+    }
+
+    function tapGame() {
+      addPoints(1, "Nice tap! You earned 1 demo point.");
+    }
+
+    function mathGame() {
+      const a = Math.floor(Math.random() * 10) + 1;
+      const b = Math.floor(Math.random() * 10) + 1;
+      const answer = prompt("What is " + a + " + " + b + "?");
+
+      if (answer === null || answer.trim() === "") return;
+
+      if (Number(answer) === a + b) {
+        addPoints(5, "Correct! You earned 5 demo points.");
+      } else {
+        document.getElementById("result").textContent =
+          "Not quite. The answer was " + (a + b) + ".";
+      }
+    }
+  </script>
+</body>
+</html>
